@@ -1,14 +1,13 @@
-function rob(nums) {
-  if (nums.length === 1) return nums[0];
-  const robRange = (start, end) => {
-    let prevMax = 0;
-    let currMax = 0;
-    for (let i = start; i <= end; i++) {
-      const temp = currMax;
-      currMax = Math.max(currMax, prevMax + nums[i]);
-      prevMax = temp;
-    }
-    return currMax;
-  };
-  return Math.max(robRange(0, nums.length - 2), robRange(1, nums.length - 1));
+function searchMatrix(matrix, target) {
+  if (matrix.length === 0 || matrix[0].length === 0) return false;
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let row = 0;
+  let col = cols - 1;
+  while (row < rows && col >= 0) {
+    if (matrix[row][col] === target) return true;
+    else if (matrix[row][col] < target) row++;
+    else col--;
+  }
+  return false;
 }
