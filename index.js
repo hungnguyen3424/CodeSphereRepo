@@ -1,12 +1,15 @@
-function isAnagram(s, t) {
-  if (s.length !== t.length) return false;
-  const map = new Map();
-  for (const char of s) {
-    map.set(char, (map.get(char) || 0) + 1);
+function subsetsWithDup(nums) {
+  const result = [];
+  nums.sort((a, b) => a - b);
+  backtrack(0, []);
+  return result;
+  function backtrack(start, current) {
+    result.push([...current]);
+    for (let i = start; i < nums.length; i++) {
+      if (i > start && nums[i] === nums[i - 1]) continue;
+      current.push(nums[i]);
+      backtrack(i + 1, current);
+      current.pop();
+    }
   }
-  for (const char of t) {
-    if (!map.has(char) || map.get(char) === 0) return false;
-    map.set(char, map.get(char) - 1);
-  }
-  return true;
 }
